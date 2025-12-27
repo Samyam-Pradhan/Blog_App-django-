@@ -21,5 +21,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #if request come in /media/ the django will in media folder and return the file
+    path('', include('blog.urls')),  # <-- root points to blog app
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

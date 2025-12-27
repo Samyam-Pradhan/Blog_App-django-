@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}All Blogs{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">All Blogs</h1>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for blog in blogs %}
+        <div class="col">
+            <div class="card h-100">
+                {% if blog.photo %}
+                    <img src="{{ blog.photo.url }}" class="card-img-top" alt="Blog Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog.user.username }}</h5>
+                    <p class="card-text">{{ blog.text }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Created: {{ blog.created_at|date:"M d, Y H:i" }}</small>
+                    {% if user.is_authenticated and blog.user == user %}
+                        <div class="mt-2">
+                            <a href="{% url 'blog_edit' blog.id %}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{% url 'blog_delete' blog.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No blogs yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
