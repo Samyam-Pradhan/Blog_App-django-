@@ -1,1 +1,4 @@
-# Blog_App-django-
+# Django Blog App
+
+# Author 
+Samyam Pradhan
